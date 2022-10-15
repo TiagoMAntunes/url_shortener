@@ -8,6 +8,9 @@ edition = "2021"
 [dependencies]
 actix-web = "4"
 serde = { version = "1.0.118", features = ["derive"] }
+regex = "1.6"
+env_logger = "*"
+log = "*"
 
 [dev-dependencies]
 reqwest = { version = "0.11", features = ["json", "blocking"] }
