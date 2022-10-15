@@ -2,6 +2,9 @@ use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
 use derive_more::{Display, Error};
 use serde::Deserialize;
 
+#[macro_use]
+extern crate diesel_migrations;
+
 mod database;
 
 #[derive(Clone)]
@@ -108,6 +111,8 @@ async fn main() -> std::io::Result<()> {
     let state = AppState {
         db: database::Database::new(),
     };
+
+    state.db.setup_database();
 
     env_logger::init();
     log::info!("Listening on port {}", port);
