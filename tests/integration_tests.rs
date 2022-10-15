@@ -1,7 +1,7 @@
 use reqwest::{self, StatusCode};
 
 fn get_url() -> String {
-    let port = std::env::var("PORT").unwrap();
+    let port = std::env::var("PORT").expect("No port specified to run test");
     format!("http://localhost:{}", port)
 }
 
