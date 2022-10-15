@@ -2,7 +2,9 @@
 pub struct Database {}
 
 
-pub enum DatabaseError {}
+pub enum DatabaseError {
+    NotFound,
+}
 
 impl std::fmt::Display for DatabaseError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

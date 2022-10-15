@@ -1400,6 +1400,7 @@ name = "url_shortener_rust"
 version = "0.1.0"
 dependencies = [
  "actix-web",
+ "derive_more",
  "env_logger",
  "log",
  "regex",
