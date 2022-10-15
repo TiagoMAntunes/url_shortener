@@ -13,6 +13,7 @@ in
             pkgs.pkg-config
             pkgs.openssl
             pkgs.diesel-cli
+            pkgs.postgresql
         ];
 
         RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";

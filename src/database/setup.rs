@@ -2,9 +2,8 @@ use crate::diesel_migrations::MigrationHarness;
 use diesel::{pg::PgConnection, r2d2};
 use diesel_migrations::{embed_migrations, EmbeddedMigrations};
 
-// Run migrations at compile time
-// pub const MIGRATIONS: diesel_migrations::EmbeddedMigrations =
-// diesel_migrations::embed_migrations!("./migrations");
+// Generate migrations at compile time
+pub const MIGRATIONS: EmbeddedMigrations = embed_migrations!();
 
 pub fn create_db_pool() -> r2d2::Pool<r2d2::ConnectionManager<PgConnection>> {
     let db_url = format!(
@@ -18,8 +17,7 @@ pub fn create_db_pool() -> r2d2::Pool<r2d2::ConnectionManager<PgConnection>> {
         .expect("Failed to create pool.")
 }
 
-pub const MIGRATIONS: EmbeddedMigrations = embed_migrations!();
-
+// Run migrations on startup in production
 pub fn run_migrations(conn: &mut PgConnection) {
     conn.run_pending_migrations(MIGRATIONS).unwrap();
 }

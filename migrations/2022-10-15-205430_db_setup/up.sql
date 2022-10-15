@@ -1,4 +1,4 @@
 CREATE TABLE IF NOT EXISTS urls(
     shortened VARCHAR(10) PRIMARY KEY,
-    original VARCHAR(2048)
+    original VARCHAR(2048) NOT NULL
 );

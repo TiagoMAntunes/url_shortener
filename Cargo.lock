@@ -1531,6 +1531,7 @@ dependencies = [
  "diesel_migrations",
  "env_logger",
  "log",
+ "rand",
  "regex",
  "reqwest",
  "serde",
