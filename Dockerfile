@@ -18,6 +18,7 @@ RUN cargo build --release
 
 FROM debian:buster-slim
 WORKDIR app
+RUN apt update && apt install -y libpq-dev
 COPY --from=builder /app/target/release/url_shortener_rust .
 ENV RUST_LOG=debug
 ENTRYPOINT ["/app/url_shortener_rust"]

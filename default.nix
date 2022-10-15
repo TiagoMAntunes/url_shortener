@@ -12,6 +12,7 @@ in
             pkgs.darwin.apple_sdk.frameworks.Security
             pkgs.pkg-config
             pkgs.openssl
+            pkgs.diesel-cli
         ];
 
         RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";

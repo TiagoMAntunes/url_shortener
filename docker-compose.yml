@@ -3,5 +3,14 @@ services:
     build: .
     environment:
       - PORT=${PORT}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
     ports:
       - ${PORT}:${PORT}
+  postgres:
+    image: postgres:14.5-alpine
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
