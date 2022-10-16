@@ -1,6 +1,5 @@
-use crate::diesel_migrations::MigrationHarness;
 use diesel::{pg::PgConnection, r2d2};
-use diesel_migrations::{embed_migrations, EmbeddedMigrations};
+use diesel_migrations::{embed_migrations, EmbeddedMigrations, MigrationHarness};
 
 // Generate migrations at compile time
 pub const MIGRATIONS: EmbeddedMigrations = embed_migrations!();

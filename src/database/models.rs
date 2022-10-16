@@ -2,7 +2,6 @@ use super::schema;
 
 // This file keeps track of all the models to access the database
 use diesel::{Insertable, Queryable};
-use diesel::prelude::*;
 
 #[derive(Insertable)]
 #[diesel(table_name = schema::urls)]

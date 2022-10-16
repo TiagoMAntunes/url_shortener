@@ -15,11 +15,7 @@ fn submit_url(url: &str) -> reqwest::Result<reqwest::blocking::Response> {
 
     client
         .post(&get_url())
-        .header(
-            reqwest::header::CONTENT_TYPE,
-            "application/x-www-form-urlencoded",
-        )
-        .query(&[("url", &url)])
+        .form(&[("url", url)])
         .send()
 }
 
@@ -32,9 +28,10 @@ fn test_inexistent_url() {
 
 #[test]
 fn test_submit_get_url() {
-    let url = "https://www.google.com";
+    let url = "https://www.google.com/";
 
     let response = submit_url(url).unwrap();
+    assert_eq!(response.status(), StatusCode::OK);
     let shortened_url = response.text().unwrap();
 
     let response = fetch_url(&shortened_url).unwrap();

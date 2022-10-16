@@ -2,9 +2,6 @@ use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
 use derive_more::{Display, Error};
 use serde::Deserialize;
 
-#[macro_use]
-extern crate diesel_migrations;
-
 mod database;
 
 #[derive(Clone)]
@@ -18,7 +15,7 @@ enum APIError {
     Internal,
     #[display(fmt = "The specified URL does not exist")]
     URLNotFound,
-    #[display(fmt = "Invalid URL format")]
+    #[display(fmt = "Not a valid URL")]
     InvalidURL,
 }
 
@@ -49,7 +46,9 @@ async fn handle_fetch_url(
     match data.db.fetch_url(&url).await {
         Ok(original_url) => {
             log::debug!("Short URL {} has original {}", url, original_url);
-            Ok(original_url)
+            Ok(HttpResponse::PermanentRedirect()
+                .append_header((actix_web::http::header::LOCATION, original_url))
+                .finish())
         }
         Err(e) => {
             log::error!("Failed to fetch URL {}, err: {}", url, e);
